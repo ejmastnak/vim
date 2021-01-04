@@ -8,7 +8,7 @@ set ruler				" Shows cursor position in current line
 set showcmd				" Shows partially typed commands
 filetype on				" Enable filetype detection
 filetype plugin on			" Load file-specific plugins
-filetype indent on			" Use file-specific indentation
+filetype indent on			" Load file-specific indentation
 
 
 " Plugins using vim-plug
