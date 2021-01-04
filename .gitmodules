@@ -1,6 +1,0 @@
-[submodule "pack/tpope/start/vim-commentary"]
-	path = pack/tpope/start/vim-commentary
-	url = https://github.com/tpope/vim-commentary.git
-[submodule "pack/autocomplete/start/AutoComplPop"]
-	path = pack/autocomplete/start/AutoComplPop
-	url = https://github.com/vim-scripts/AutoComplPop.git
