@@ -10,3 +10,6 @@ Thumbs.db
 
 # Vim network history
 .netrwhist
+
+# Ignore git repositories within plugins
+pack/
