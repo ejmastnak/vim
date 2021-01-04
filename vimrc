@@ -10,12 +10,11 @@ filetype on				" Enable filetype detection
 filetype plugin on			" Load file-specific plugins
 filetype indent on			" Load file-specific indentation
 
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o  " disable automatic commenting
 
-" Plugins using vim-plug
-call plug#begin('~/.vim/plugged') 	" install plugins in ~/.vim/plugged
-Plug 'tpope/vim-commentary'
-call plug#end()
-
+" autocomplete 
+set completeopt=longest,menuone         " see :help completeopt
+set shortmess+=c                        " turn off autocomplete message in status bar
 
 " Match system and vim clipboards
 if system('uname -s') == "Darwin\n"
