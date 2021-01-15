@@ -1,0 +1,158 @@
+snippet f "Fraction frac"
+\frac{$1}{$2} $0
+endsnippet
+
+snippet tf "Text fraction tfrac"
+\frac{$1}{$2} $0
+endsnippet
+
+snippet m "Inline math $ $"
+$ $1 $ $0
+endsnippet
+
+
+
+snippet env "New environment" b
+\begin{${1:environment}}
+	$2
+\end{$1}
+$0
+endsnippet
+
+snippet eq "Equation environment with suppressed numbering" b
+\begin{equation*}
+	$1
+\end{equation*}
+$0
+endsnippet
+
+snippet eqq "Equation environment with numbering" b
+\begin{equation}
+	$1
+\end{equation}
+$0
+endsnippet
+
+snippet al "Align environment with suppressed numbering" b
+\begin{align*}
+	$1
+\end{align*}
+$0
+endsnippet
+
+snippet all "Align environment with numbering" b
+\begin{align}
+	$1
+\end{align}
+$0
+endsnippet
+
+snippet it "Itemize environment" b
+\begin{itemize}
+	\item $1
+\end{itemize}
+$0
+endsnippet
+
+snippet en "Enumerate environment" b
+\begin{enumerate}
+	\item $1
+\end{enumerate}
+$0
+endsnippet
+
+snippet bm "Bracket matrix bmatrix" b
+\begin{bmatrix}
+	$1
+\end{bmatrix}
+$0
+endsnippet
+
+snippet pm "Parentheses matrix pmatrix" b
+\begin{pmatrix}
+	$1
+\end{pmatrix}
+$0
+endsnippet
+
+snippet q "Quote environment" b
+\begin{quote}
+	$1
+\end{quote}
+$0
+endsnippet
+
+snippet fig "Figure environment" b
+\begin{figure}[${1:htb!}]
+	\centering
+	\includegraphics[width=${2:\linewidth}]{${3:path}}
+	\caption{${4:caption}}
+	\label{${5:label}}
+\end{figure}
+$0
+endsnippet
+
+snippet tab "Table environment" b
+\begin{table}[${1:htb!}]
+	\centering
+	\begin{tabular}{$2}
+		$3
+	\end{tabular}
+	\caption{${4:caption}}
+	\label{${5:label}}
+\end{table}
+$0
+endsnippet
+
+
+snippet l( "Left/Right parentheses" A
+\left( $1 \right) $0
+endsnippet
+
+snippet l[ "Left/Right square brackets" A
+\left[ $1 \right] $0
+endsnippet
+
+snippet l{ "Left/Right curly braces" A
+\left\\{ $1 \right\\} $0
+endsnippet
+
+snippet b( "Big parentheses" A
+\big( $1 \big) $0
+endsnippet
+
+snippet b[ "Big square brackets" A
+\big[ $1 \big] $0
+endsnippet
+
+snippet b{ "Big curly braces" A
+\big\\{ $1 \big\\} $0
+endsnippet
+
+snippet u "Superscript" i
+^{$1}$0
+endsnippet
+
+snippet d "Subscript" i
+_{$1}$0
+endsnippet
+
+snippet ds "Text subscript" i
+_{\text{$1}}$0
+endsnippet
+
+snippet tt "Typewriter text texttt"
+\texttt{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet tb "Boldface text textbf"
+\textbf{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet ti "Italic text textit"
+\textit{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet ii "Item for enumerated environments \item"
+\item 
+endsnippet
