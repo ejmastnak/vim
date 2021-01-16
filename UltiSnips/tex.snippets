@@ -10,6 +10,21 @@ snippet m "Inline math $ $"
 $ $1 $ $0
 endsnippet
 
+snippet \s "New section" b
+\section{$1}
+$0
+endsnippet
+
+snippet \ss "New subsection" b
+\subsection{$1}
+$0
+endsnippet
+
+snippet \sss "New subsubsection" b
+\subsubsection{$1}
+$0
+endsnippet
+
 
 
 snippet env "New environment" b
@@ -105,29 +120,41 @@ $0
 endsnippet
 
 
+
 snippet l( "Left/Right parentheses" A
-\left( $1 \right) $0
+\left( ${1:${VISUAL:}} \right) $0
 endsnippet
 
 snippet l[ "Left/Right square brackets" A
-\left[ $1 \right] $0
+\left[ ${1:${VISUAL:}} \right] $0
 endsnippet
 
 snippet l{ "Left/Right curly braces" A
-\left\\{ $1 \right\\} $0
+\left\\{ ${1:${VISUAL:}} \right\\} $0
 endsnippet
 
 snippet b( "Big parentheses" A
-\big( $1 \big) $0
+\big( ${1:${VISUAL:}} \big) $0
 endsnippet
 
 snippet b[ "Big square brackets" A
-\big[ $1 \big] $0
+\big[ ${1:${VISUAL:}} \big] $0
 endsnippet
 
 snippet b{ "Big curly braces" A
-\big\\{ $1 \big\\} $0
+\big\\{ ${1:${VISUAL:}} \big\\} $0
 endsnippet
+
+snippet { "Autocomplete curly braces" A
+{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet \{ "Escaped curly braces"
+\\{${1:${VISUAL:}}\\}$0
+endsnippet
+
+
+
 
 snippet u "Superscript" i
 ^{$1}$0
