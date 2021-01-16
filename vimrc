@@ -33,9 +33,15 @@ nnoremap $ g$
 nnoremap A g$a
 nnoremap I g^i
 
-" map jk and kj to <Esc> to exit insert mode
-inoremap jk <Esc>
-inoremap kj <Esc>
+" mappings for faster split window navigation
+	noremap <C-h> <C-w>h
+	noremap <C-j> <C-w>j
+	noremap <C-k> <C-w>k
+	noremap <C-l> <C-w>l
+
+" map jk and kj to <Esc> to exit insert mode  (CURRENTLY NOT NEEDED BECAUSE OF <CAPSLOCK> MAPPED TO <ESC>)
+" inoremap jk <Esc>
+" inoremap kj <Esc>
 
 " to add new lines without leaving normal mode
 nnoremap oo o<Esc>
