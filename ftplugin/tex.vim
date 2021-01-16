@@ -17,6 +17,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
+:let g:asyncrun_open = 8      " open quickfix menu with 8 lines visible when using AsyncRun
 
 " START COMPILATION FUNCTIONS
 
@@ -29,29 +30,12 @@ if !exists("s:CompileLaTex")  " check function isn't already loaded
     " Perl-style regex to find errors of the form ./filename.tex:[0-9]+: OR ^l.[0-9]+
     " Example group 1: ./myfile.tex:11: Extra }, or forgotten \endgroup.
     " Example group 2: l.11 \endcenter}
-    let s:reg = '"(\./' . substitute(expand("%"), '\.', '\\.', "") . ':[0-9]+|^l\.[0-9]+)"'
+    let s:err_regex = '"(\./' . substitute(expand("%"), '\.', '\\.', "") . ':[0-9]+|^l\.[0-9]+)"'
+    let s:filter_regex = '"==> Fatal error occurred, no output PDF file produced\!"' 
 
     " The final grep -v '...' filters out a redundant latexmk error message to reduce clutter
-    execute "!latexmk -pdf -synctex=1 " . expand('%')  . " | grep -P " . s:reg . " | grep -v " . '"==> Fatal error occurred, no output PDF file produced\!"' 
-    
-    " Switches focus from pdf viewer back to MacVim
-    execute "!open -a MacVim"
+    execute "AsyncRun latexmk -pdf -synctex=1 " . expand('%')  . " | grep -P " . s:err_regex . " | grep -v " . s:filter_regex
 	endfunction
-endif
-
-
-if !exists("s:CompileAndShow")  " check function isn't already loaded
-  function s:CompileAndShow()
-    " Updates and compiles the current tex file and moves the pdf viewer (Skim) to the last change
-    update
-
-    " See CompileLaTex (above) for an explanation of the regex
-    let s:reg = '"(\./' . substitute(expand("%"), '\.', '\\.', "") . ':[0-9]+|^l\.[0-9]+)"'
-    execute "!latexmk -pdf -synctex=1 " . expand('%')  . " | grep -P " . s:reg . " | grep -v " . '"==> Fatal error occurred, no output PDF file produced\!"' 
-
-    call s:ForwardShow()  " jumps to last change
-
-  endfunction
 endif
 
 
@@ -60,10 +44,8 @@ if !exists("s:ForwardShow")  " check function isn't already loaded
     " Moves the pdf viewer (Skim) to the current line in the tex document (aka forward search)
     " This line becomes e.g. :!/Applications/.../displayline 42 file.pdf file.tex 
     " line('.') finds the current line number and expand('%') expands the current file name
-    execute "!/Applications/Skim.app/Contents/SharedSupport/displayline " . line('.') . " " . substitute(expand('%'), '\.tex', '.pdf', "") . " " . expand('%')
-
-    " Switches focus from pdf viewer back to MacVim
-    execute "!open -a MacVim"
+    " && open -a MacVim switches focus from pdf viewer back to MacVim if forward show succeeded
+    execute "AsyncRun /Applications/Skim.app/Contents/SharedSupport/displayline " . line('.') . " " . substitute(expand('%'), '\.tex', '.pdf', "") . " " . expand('%') . " && open -a MacVim"
   endfunction
 endif
 " END COMPILATION FUNCTIONS
@@ -73,24 +55,15 @@ endif
 
 " Mapping for CompileLaTex()
 if !hasmapto('<Plug>TexCompileLaTex')
-  map <unique> <buffer> <F5> <Plug>TexCompileLaTex
+  map <unique> <buffer> <F6> <Plug>TexCompileLaTex
 endif
 noremap <unique> <script> <Plug>TexCompileLaTex <SID>CompileLaTex
 noremap <SID>CompileLaTex :call <SID>CompileLaTex()<CR>
-
-
-" Mapping for CompileAndShow()
-if !hasmapto('<Plug>CompileAndShow')
-  map <unique> <buffer> <F6> <Plug>CompileAndShow
-endif
-noremap <unique> <script> <Plug>CompileAndShow <SID>CompileAndShow
-noremap <SID>CompileAndShow :call <SID>CompileAndShow()<CR>
-
 
 " Mapping for ForwardShow()
 if !hasmapto('<Plug>ForwardShow')
   map <unique> <buffer> <F7> <Plug>ForwardShow
 endif
 noremap <unique> <script> <Plug>ForwardShow <SID>ForwardShow
-noremap <SID>ForwardShow :call <SID>ForwardShow()<CR><CR>
+noremap <SID>ForwardShow :call <SID>ForwardShow()<CR>
 " END KEY MAPS
