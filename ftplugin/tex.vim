@@ -8,6 +8,7 @@ let b:did_mytexplug = 1       " plugin is loaded
 
 " LaTex-specific settings
 let g:tex_flavor = 'latex'		" recognize tex files as latex
+colorscheme xcodelighthc      " set colorscheme
 set guifont=Monaco:h12        " increase font size on gvim
 
 " setting indenendation
@@ -17,35 +18,43 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-:let g:asyncrun_open = 8      " open quickfix menu with 8 lines visible when using AsyncRun
+
+" configuring Vim's built-in tex indentation
+let g:tex_indent_items=0
+
+
+" START ASYNCRUN CONFIGURATION 
+:let g:asyncrun_open = 7      " open quickfix menu with 7 lines visible when using AsyncRun
+
+
 
 " START COMPILATION FUNCTIONS
 
-if !exists("s:CompileLaTex")  " check function isn't already loaded
-	function s:CompileLaTex()
-	  " Updates and compiles the current tex file
-
+if !exists("s:CompileLatex")  " check function isn't already loaded
+	function s:CompileLatex()
     update  " saves buffer if necessary
+    " The following command reads: AsyncRun sh ~/.vim/compiler/compile-tex.sh myfile
+    execute "AsyncRun sh " . expand($HOME) . "/.vim/compilation/pdftex-compile.sh" . " $(VIM_FILENOEXT)"
+	endfunction
+endif
 
-    " Perl-style regex to find errors of the form ./filename.tex:[0-9]+: OR ^l.[0-9]+
-    " Example group 1: ./myfile.tex:11: Extra }, or forgotten \endgroup.
-    " Example group 2: l.11 \endcenter}
-    let s:err_regex = '"(\./' . substitute(expand("%"), '\.', '\\.', "") . ':[0-9]+|^l\.[0-9]+)"'
-    let s:filter_regex = '"==> Fatal error occurred, no output PDF file produced\!"' 
 
-    " The final grep -v '...' filters out a redundant latexmk error message to reduce clutter
-    execute "AsyncRun latexmk -pdf -synctex=1 " . expand('%')  . " | grep -P " . s:err_regex . " | grep -v " . s:filter_regex
+if !exists("s:CompileLatexAndShow")  " check function isn't already loaded
+	function s:CompileLatexAndShow()
+    update  " saves buffer if necessary
+    " The following command reads: AsyncRun sh ~/.vim/compiler/compile-tex.sh myfile linenumber
+    execute "AsyncRun sh " . expand($HOME) . "/.vim/compilation/pdftex-compile-show.sh" . " $(VIM_FILENOEXT) " . line('.')
 	endfunction
 endif
 
 
 if !exists("s:ForwardShow")  " check function isn't already loaded
+  " Moves the pdf viewer (Skim) to the current line in the tex document (aka forward search)
   function s:ForwardShow()
-    " Moves the pdf viewer (Skim) to the current line in the tex document (aka forward search)
-    " This line becomes e.g. :!/Applications/.../displayline 42 file.pdf file.tex 
-    " line('.') finds the current line number and expand('%') expands the current file name
-    " && open -a MacVim switches focus from pdf viewer back to MacVim if forward show succeeded
-    execute "AsyncRun /Applications/Skim.app/Contents/SharedSupport/displayline " . line('.') . " " . substitute(expand('%'), '\.tex', '.pdf', "") . " " . expand('%') . " && open -a MacVim"
+
+    " The following command becomes e.g. :!/Applications/.../displayline -b -g 42 file.pdf file.tex 
+    " line('.') finds the current line number; -b -g highlight line and open Skim in the background
+    execute "AsyncRun -silent -strip /Applications/Skim.app/Contents/SharedSupport/displayline -b -g " . line('.') . " $(VIM_FILENOEXT).pdf $(VIM_FILENOEXT).tex"
   endfunction
 endif
 " END COMPILATION FUNCTIONS
@@ -53,17 +62,47 @@ endif
 
 "START KEY MAPS
 
-" Mapping for CompileLaTex()
-if !hasmapto('<Plug>TexCompileLaTex')
-  map <unique> <buffer> <F6> <Plug>TexCompileLaTex
+" nvo modes mapping for CompileLatex()
+if !hasmapto('<Plug>TexCompileLatex', 'nvo')
+  map <unique> <buffer> <F5> <Plug>TexCompileLatex
 endif
-noremap <unique> <script> <Plug>TexCompileLaTex <SID>CompileLaTex
-noremap <SID>CompileLaTex :call <SID>CompileLaTex()<CR>
+noremap <unique> <script> <Plug>TexCompileLatex <SID>CompileLatex
+noremap <SID>CompileLatex :call <SID>CompileLatex()<CR>
 
-" Mapping for ForwardShow()
-if !hasmapto('<Plug>ForwardShow')
+" insert mode mapping for CompilePDFLatex()
+if !hasmapto('<Plug>TexCompilePDFLatex', 'i')
+  imap <unique> <buffer> <F5> <Plug>TexCompilePDFLatex
+endif
+inoremap <unique> <script> <Plug>TexCompileLatex <SID>CompileLatex
+inoremap <SID>CompileLatex <Esc>:call <SID>CompileLatex()<CR>
+
+
+" nvo modes mapping for CompileLatexAndShow()
+if !hasmapto('<Plug>TexCompileLatexAndShow', 'nvo')
+  map <unique> <buffer> <F6> <Plug>TexCompileLatexAndShow
+endif
+noremap <unique> <script> <Plug>TexCompileLatexAndShow <SID>CompileLatexAndShow
+noremap <SID>CompileLatexAndShow :call <SID>CompileLatexAndShow()<CR>
+
+" insert mode mapping for CompileLatexAndShow()
+if !hasmapto('<Plug>TexCompileLatexAndShow', 'i')
+  imap <unique> <buffer> <F6> <Plug>TexCompileLatexAndShow
+endif
+inoremap <unique> <script> <Plug>TexCompileLatexAndShow <SID>CompileLatexAndShow
+inoremap <SID>CompileLatexAndShow <Esc>:call <SID>CompileLatexAndShow()<CR>
+
+
+" nvo modes mapping for ForwardShow()
+if !hasmapto('<Plug>ForwardShow', 'nvo')
   map <unique> <buffer> <F7> <Plug>ForwardShow
 endif
 noremap <unique> <script> <Plug>ForwardShow <SID>ForwardShow
-noremap <SID>ForwardShow :call <SID>ForwardShow()<CR>
+noremap <silent> <SID>ForwardShow :call <SID>ForwardShow()<CR>
+
+" insert mode mapping for ForwardShow()
+if !hasmapto('<Plug>ForwardShow', 'i')
+  imap <unique> <buffer> <F7> <Plug>ForwardShow
+endif
+inoremap <unique> <script> <Plug>ForwardShow <SID>ForwardShow
+inoremap <silent> <SID>ForwardShow <Esc>:call <SID>ForwardShow()<CR>
 " END KEY MAPS
