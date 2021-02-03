@@ -1,0 +1,159 @@
+# Fractions, subscripts, superscripts
+
+# Many snippets in this file are triggered with the regular expression ([\W_]trigger) 
+# This regex expands the snippet only if trigger is preceded by either:
+#		- a non-alpha-numeric character (due to \W) e.g. whitespace ( { [ etc...
+#		- the underscore
+# The snippet is NOT expanded after
+#		- a-z, A-Z or 0-9
+#		- beginning of a line
+
+
+snippet "([\W_])ff" "\frac{}{}" rA
+`!p snip.rv = match.group(1)`\frac{${1:${VISUAL:}}}{$2}$0
+endsnippet
+
+snippet "([\W_])tf" "\tfrac{}{}" rA
+`!p snip.rv = match.group(1)`\tfrac{${1:${VISUAL:}}}{$2}$0
+endsnippet
+
+# Triggers on [a-z], [A-z] and } ) ] |
+snippet "([a-z]|[A-Z]|[\}\)\]\|])22" "Automatic squared superscript" rA
+`!p snip.rv = match.group(1)`^{2}
+endsnippet
+
+# Triggers on [a-z], [A-z] and } ) ] |
+snippet "([a-z]|[A-Z]|[\}\)\]\|])00" "Automatic 0 subscript" rA
+`!p snip.rv = match.group(1)`_{0}
+endsnippet
+
+snippet uu "Superscript" iA
+^{${1:${VISUAL:}}}$0
+endsnippet
+
+# The regex ensures the subscript does not trigger in front of a backslash escape character
+snippet "([^\\])_" "Subscript" rA
+`!p snip.rv = match.group(1)`_{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet sd "Text subscript" iA
+_{\text{${1:${VISUAL:}}}}$0
+endsnippet
+
+snippet "([\W_])sq" "\sqrt (square root)" rA
+`!p snip.rv = match.group(1)`\sqrt{${1:${VISUAL:}}}$0
+endsnippet
+
+# Common semantic math commands like vec, tilde, etc...
+
+
+snippet "([\W_])vv" "\vec" rA
+`!p snip.rv = match.group(1)`\vec{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])t" "\tilde" r
+`!p snip.rv = match.group(1)`\tilde{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])wt" "\widetilde" r
+`!p snip.rv = match.group(1)`\widetilde{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])h" "\hat" r
+`!p snip.rv = match.group(1)`\hat{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])d" "\dot" r
+`!p snip.rv = match.group(1)`\dot{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])dd" "\ddot" r
+`!p snip.rv = match.group(1)`\ddot{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])vd" "Dotted vector quantity" r
+`!p snip.rv = match.group(1)`\dot{\vec{${1:${VISUAL:}}}}$0
+endsnippet
+
+snippet "([\W_])vdd" "Double-dotted vector quantity" r
+`!p snip.rv = match.group(1)`\ddot{\vec{${1:${VISUAL:}}}}$0
+endsnippet
+
+snippet "([\W_])mc" "\mathcal" r
+`!p snip.rv = match.group(1)`\mathcal{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])mbb" "\mathbb" r
+`!p snip.rv = match.group(1)`\mathbb{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])mbf" "\mathbf" r
+`!p snip.rv = match.group(1)`\mathbf{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])pdv" "\pdv{}" r
+`!p snip.rv = match.group(1)`\pdv{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])pdvv" "\pdv{}{}" r
+`!p snip.rv = match.group(1)`\pdv{$1}{$2}$0
+endsnippet
+
+snippet "([\W_])ppdv" "\pdv[]{}{}" r
+`!p snip.rv = match.group(1)`\pdv[$1]{$2}{$3}$0
+endsnippet
+
+snippet "([\W_])dv" "\dv{}" r
+`!p snip.rv = match.group(1)`\dv{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])dvv" "\dv{}{}" r
+`!p snip.rv = match.group(1)`\dv{$1}{$2}$0
+endsnippet
+
+snippet "([\W_])ddv" "\dv[]{}{}" r
+`!p snip.rv = match.group(1)`\dv[$1]{$2}{$3}$0
+endsnippet
+
+snippet "([\W_])abs" "\abs{}" r
+`!p snip.rv = match.group(1)`\abs{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])norm" "\norm{}" r
+`!p snip.rv = match.group(1)`\norm{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])ev" "\ev{}" r
+`!p snip.rv = match.group(1)`\ev{${1:${VISUAL:}}}$0
+endsnippet
+
+
+
+# Some of my own math commands
+snippet int "Integral with lower limit" i
+\int_{$1}$0
+endsnippet
+
+snippet intt "Integral with upper and lower limit" i
+\int_{$1}^{$2}$0
+endsnippet
+
+snippet sum "Sum with lower limit" i
+\sum_{$1}$0
+endsnippet
+
+snippet summ "Sum with upper and lower limit" i
+\sum_{$1}^{$2}$0
+endsnippet
+
+# Note the semantics of the following eqt and eqqt triggers are reversed
+# I use the shorter eqt for qquad since I use qquad spacing more often
+snippet eqt "qquad-spaced text in equation"
+\qquad \text{${1:${VISUAL:}}} \qquad $0
+endsnippet
+
+snippet eqqt "quad-spaced text in equation"
+\quad \text{${1:${VISUAL:}}} \quad $0
+endsnippet
+
+

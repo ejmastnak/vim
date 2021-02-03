@@ -1,0 +1,17 @@
+# Various ``sytem-style'' commands.
+# TODO: hyperref references for labeled sections
+# Package import
+# \cite command
+# \ref command
+
+snippet \SI "SI{}{}" i
+\SI{$1}{$2}$0
+endsnippet
+
+snippet \SIr "SIrange{}{}" i
+\SIrange{$1}{$2}{$3}$0
+endsnippet
+
+snippet \si "si{} (\si unit)" i
+\si{$1}$0
+endsnippet

@@ -1,0 +1,51 @@
+# Many snippets in this file are triggered with the regular expression ([\W_]trigger) 
+# This regex expands the snippet only if trigger is preceded by either:
+#		- a non-alpha-numeric character (due to \W) e.g. whitespace ( { [ etc...
+#		- the underscore
+# The snippet is NOT expanded after
+#		- a-z, A-Z or 0-9
+#		- beginning of a line
+
+snippet "([\W_])inf" "\infty" r
+`!p snip.rv = match.group(1)`\infty
+endsnippet
+
+snippet "([\W_])intf" "Integral from negative to positive infinity" r
+`!p snip.rv = match.group(1)`\int_{-\infty}^{\infty}
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])df" "\diff" rA
+`!p snip.rv = match.group(1)`\diff 
+endsnippet
+
+snippet tbs "\textbackslash" i
+\textbackslash
+endsnippet
+
+snippet ii "Item for enumerated environments \item" bA
+\item 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])q" "\quad" r
+`!p snip.rv = match.group(1)`\quad 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])qq" "\qquad" r
+`!p snip.rv = match.group(1)`\qquad 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])b" "\big" r
+`!p snip.rv = match.group(1)`\big 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])bb" "\bigg" r
+`!p snip.rv = match.group(1)`\bigg 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])B" "\Big" r
+`!p snip.rv = match.group(1)`\Big 
+endsnippet
+
+
+# TODO 
+# map .. to /cdot in math context

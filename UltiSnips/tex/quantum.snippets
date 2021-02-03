@@ -1,0 +1,43 @@
+# Dirac braket notation commands
+
+snippet "([\W_])ket" "\ket{}" rA
+`!p snip.rv = match.group(1)`\ket{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])bra" "\bra{}" rA
+`!p snip.rv = match.group(1)`\bra{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])bk" "\braket{}{}" rA
+`!p snip.rv = match.group(1)`\braket\{$1\}\{$2\}$0
+endsnippet
+
+snippet "([\W_])mel" "\mel{}{}{} (matrix element)" rA
+`!p snip.rv = match.group(1)`\mel{$1}{$2}{$3}$0
+endsnippet
+
+snippet "([\W_])Ket" "\ket{} with fixed \big size" rA
+`!p snip.rv = match.group(1)`\bket{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])Bra" "\bra{} with fixed \big size" rA
+`!p snip.rv = match.group(1)`\bbra{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])Bk" "\braket{}{} with fixed \big size" rA
+`!p snip.rv = match.group(1)`\bbraket\{$1\}\{$2\}$0
+endsnippet
+
+snippet "([\W_])Mel" "\mel{}{}{} (matrix element) with fixed \big size" rA
+`!p snip.rv = match.group(1)`\bmel{$1}{$2}{$3}$0
+endsnippet
+
+
+# static snippets
+snippet "([^a-zA-Z0-9\\])hbar" "\hbar" rA
+`!p snip.rv = match.group(1)`\hbar
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])dag" "\dagger" rA
+`!p snip.rv = match.group(1)`\dagger
+endsnippet
