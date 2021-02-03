@@ -1,19 +1,22 @@
 #!/bin/sh
 # Arguments:
-# $1: file name without extension e.g. myfile if editing myfile.tex
+# $1: file name without extension, including relative path
+#     e.g. "./myfile" if editing myfile.tex
 # $2: boolean 0/1 controlling pdflatex or latexmk compile
-#      0 for latexmk
-#      1 for pdflatex (anything other than 0 also works)
+#     0 for latexmk
+#     1 for pdflatex (anything other than 0 also works)
 # $3: boolean 0/1 controlling shell escape compile
-#      0 for shell-escape enabled
-#      1 for shell-escape disabled (anything other than 0 also works)
+#     0 for shell-escape enabled
+#     1 for shell-escape disabled (anything other than 0 also works)
 
 
 # Example group 1: ./myfile.tex:11: Extra }, or forgotten \endgroup.
 # Example group 2: l.11 \endcenter}
-err_regex="(\./$1\.tex:[0-9]+|^l\.[0-9]+)"
+# filter_regex is used to remove a (IMO) redundant error message
+err_regex="(${1}\.tex:[0-9]+|^l\.[0-9]+)"
 filter_regex="==> Fatal error occurred, no output PDF file produced"
 
+echo "First argument is ${1}"
 
 if [ ${2} -eq 0 ] 2>/dev/null  # USE LATEXMK
 then
