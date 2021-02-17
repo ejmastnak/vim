@@ -13,8 +13,12 @@ snippet "^\[" "Square brackets at line start" rA
 [${1:${VISUAL:}}]$0
 endsnippet
 
-snippet "^\{" "Curly braces at line start" rA
-{${1:${VISUAL:}}}$0
+# snippet "^\{" "Curly braces at line start" rA
+# {${1:${VISUAL:}}}$0
+# endsnippet
+
+snippet "([^\\])\\{" "Escaped curly braces not in front of the \ escape character" rA
+`!p snip.rv = match.group(1)`\\{${1:${VISUAL:}}\\}$0
 endsnippet
 
 snippet \{ "Escaped curly braces at line start \{ \}" A

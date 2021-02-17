@@ -66,19 +66,26 @@ snippet it "Itemize environment" b
 \end{itemize}
 endsnippet
 
+snippet itt "Reversed itemize environment, used to split up an existing itemize environment" b
+\end{itemize}
+
+$0
+\begin{itemize}
+endsnippet
+
 snippet en "Enumerate environment" b
 \begin{enumerate}
 	\item $0
 \end{enumerate}
 endsnippet
 
-snippet bm "Bracket matrix bmatrix" b
+snippet bm "Bracket matrix bmatrix" bA
 \begin{bmatrix}
 	$1
 \end{bmatrix}$0
 endsnippet
 
-snippet pm "Parentheses matrix pmatrix" b
+snippet pm "Parentheses matrix pmatrix" bA
 \begin{pmatrix}
 	$1
 \end{pmatrix}$0
@@ -90,7 +97,7 @@ snippet case "Cases environment" b
 \end{cases}$0
 endsnippet
 
-snippet array "Array environment" b
+snippet arr "Array environment" b
 \begin{array}{${1:cc}}
 	$2
 \end{array}$0

@@ -18,8 +18,51 @@ snippet "([^a-zA-Z0-9\\])df" "\diff" rA
 `!p snip.rv = match.group(1)`\diff 
 endsnippet
 
-snippet tbs "\textbackslash" i
-\textbackslash
+snippet "([^a-zA-Z0-9\\])gd" "\grad" rA
+`!p snip.rv = match.group(1)`\grad 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])lap" "\laplacian" r
+`!p snip.rv = match.group(1)`\laplacian 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])cll" "\curl" rA
+`!p snip.rv = match.group(1)`\curl 
+endsnippet
+
+snippet ,. "\cdot" iA
+\cdot 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])xx" "\cross" rA
+`!p snip.rv = match.group(1)`\cross 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])ot" "\otimes" r
+`!p snip.rv = match.group(1)`\otimes 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])px" "\approx" rA
+`!p snip.rv = match.group(1)`\approx 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])nq" "\neq" rA
+`!p snip.rv = match.group(1)`\neq 
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])\.c" "\cdots" rA
+`!p snip.rv = match.group(1)`\cdots
+endsnippet
+
+snippet "([^a-zA-Z0-9\\])\.l" "\ldots" rA
+`!p snip.rv = match.group(1)`\ldots
+endsnippet
+
+# -------------------------------------------
+
+
+snippet tbs "\textbackslash" iA
+\textbackslash 
 endsnippet
 
 snippet ii "Item for enumerated environments \item" bA
