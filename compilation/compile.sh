@@ -16,8 +16,6 @@
 err_regex="(${1}\.tex:[0-9]+|^l\.[0-9]+)"
 filter_regex="==> Fatal error occurred, no output PDF file produced"
 
-echo "First argument is ${1}"
-
 if [ ${2} -eq 0 ] 2>/dev/null  # USE LATEXMK
 then
   command="latexmk -pdf -synctex=1"
