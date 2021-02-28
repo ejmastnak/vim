@@ -23,14 +23,15 @@ let g:tex_indent_items=0    " turn off automatic indenting in enumerated environ
 
 
 " START ASYNCRUN CONFIGURATION 
-:let g:asyncrun_open = 6      " automatically open quickfix menu with the given number of rows
+let g:asyncrun_open = 6      " automatically open quickfix menu with the given number of rows
 
 " useful for creating new lines in aligned environments
 inoremap <buffer> <unique> <S-CR> \\<CR>
 
 " useful for jumping to end of nested snippets
-" the silly jump to the line start via ^ ensures we exit the snippet scope
+" the slly jump to the line start via ^ is a hack to ensure cursor exits the UltiSnips snippet scope
 inoremap <buffer> <unique> <C-L> <ESC>^$a
+
 
 
 " Determine whether to compile with shell escape
