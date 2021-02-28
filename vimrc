@@ -10,6 +10,7 @@ set showcmd				    " Shows partially typed commands
 filetype on				    " Enable filetype detection
 filetype plugin on		" Load file-specific plugins
 filetype indent on		" Load file-specific indentation
+set spelllang=en_us   " Language for spell check
 
 " let mapleader = " "
 
