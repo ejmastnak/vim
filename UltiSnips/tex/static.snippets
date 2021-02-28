@@ -11,7 +11,7 @@ snippet "([\W_])inf" "\infty" r
 endsnippet
 
 snippet "([\W_])intf" "Integral from negative to positive infinity" r
-`!p snip.rv = match.group(1)`\int_{-\infty}^{\infty}
+`!p snip.rv = match.group(1)`\int_{-\infty}^{\infty} 
 endsnippet
 
 snippet "([^a-zA-Z0-9\\])df" "\diff" rA
@@ -34,8 +34,8 @@ snippet ,. "\cdot" iA
 \cdot 
 endsnippet
 
-snippet "([^a-zA-Z0-9\\])xx" "\cross" rA
-`!p snip.rv = match.group(1)`\cross 
+snippet xx "\cross" A
+\cross 
 endsnippet
 
 snippet "([^a-zA-Z0-9\\])ot" "\otimes" r
@@ -46,16 +46,8 @@ snippet "([^a-zA-Z0-9\\])px" "\approx" rA
 `!p snip.rv = match.group(1)`\approx 
 endsnippet
 
-snippet "([^a-zA-Z0-9\\])nq" "\neq" rA
-`!p snip.rv = match.group(1)`\neq 
-endsnippet
-
-snippet "([^a-zA-Z0-9\\])\.c" "\cdots" rA
-`!p snip.rv = match.group(1)`\cdots
-endsnippet
-
-snippet "([^a-zA-Z0-9\\])\.l" "\ldots" rA
-`!p snip.rv = match.group(1)`\ldots
+snippet "([^a-zA-Z0-9\\])eq" "\equiv" r
+`!p snip.rv = match.group(1)`\equiv 
 endsnippet
 
 # -------------------------------------------
@@ -69,13 +61,18 @@ snippet ii "Item for enumerated environments \item" bA
 \item 
 endsnippet
 
+snippet bii "\bibitem" bA
+\bibitem{${1:keyword}} $0
+endsnippet
+
 snippet "([^a-zA-Z0-9\\])q" "\quad" r
 `!p snip.rv = match.group(1)`\quad 
 endsnippet
 
-snippet "([^a-zA-Z0-9\\])qq" "\qquad" r
+snippet "([^a-zA-Z0-9\\])qq" "\qquad" rA
 `!p snip.rv = match.group(1)`\qquad 
 endsnippet
+
 
 snippet "([^a-zA-Z0-9\\])b" "\big" r
 `!p snip.rv = match.group(1)`\big 

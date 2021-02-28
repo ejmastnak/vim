@@ -1,72 +1,61 @@
 # Delimiters
 
-snippet "([\W_])big" "Generic \big \big delimiters" r
-`!p snip.rv = match.group(1)`\big$1 ${2:${VISUAL:}} \big$1$0
-endsnippet
-
-
-snippet "^\(" "Parentheses at line start" rA
-(${1:${VISUAL:}})$0
-endsnippet
-
-snippet "^\[" "Square brackets at line start" rA
-[${1:${VISUAL:}}]$0
-endsnippet
-
-# snippet "^\{" "Curly braces at line start" rA
-# {${1:${VISUAL:}}}$0
+# snippet "([\W_])big" "Generic \big \big delimiters" r
+# `!p snip.rv = match.group(1)`\big$1 ${2:${VISUAL:}} \big$1$0
 # endsnippet
 
-snippet "([^\\])\\{" "Escaped curly braces not in front of the \ escape character" rA
+snippet "(^|[^;])\\{" " \{...\} Escaped curly braces not in front of the ; character" rA
 `!p snip.rv = match.group(1)`\\{${1:${VISUAL:}}\\}$0
 endsnippet
 
-snippet \{ "Escaped curly braces at line start \{ \}" A
-\\{${1:${VISUAL:}}\\}$0
-endsnippet
-
-snippet "([^\\])\(" "Parentheses not in front of the \ escape character" rA
+snippet "(^|[^;])\(" " (...) Parentheses not in front of the ; character" rA
 `!p snip.rv = match.group(1)`(${1:${VISUAL:}})$0
 endsnippet
 
-snippet "([^\\])\[" "Square brackets not in front of the \ escape character" rA
+snippet "(^|[^;])\[" " [...] Square brackets not in front of the ; character" rA
 `!p snip.rv = match.group(1)`[${1:${VISUAL:}}]$0
 endsnippet
 
-snippet "([^\\])\{" "Curly braces not in front of the \ escape character" rA
+snippet "(^|[^\\])\{" " {...} Curly braces not in front of the \\ character" rA
 `!p snip.rv = match.group(1)`{${1:${VISUAL:}}}$0
 endsnippet
 
-snippet \( "Escaped single parenthesis" iA
+# The following few snippets provides a way to write unpaired delimiters,
+#		since the delimiters default to paired delimiters e.g. ( becomes ()
+snippet ;( "Unpaired left parenthesis" iA
 (
 endsnippet
 
-snippet \[ "Escaped single square bracket" iA
+snippet ;[ "Unpaired square bracket" iA
 [
 endsnippet
 
+snippet ;{ "Unpaired curly bracket" iA
+{
+endsnippet
 
 priority 1
-snippet "([\W_])l\(" "Left/Right parentheses" rA
+snippet "([^a-zA-Z])l\(" "Left/Right parentheses" rA
 `!p snip.rv = match.group(1)`\left( ${1:${VISUAL:}} \right)$0
 endsnippet
 
-snippet "([\W_])l\[" "Left/Right square brackets" rA
+snippet "([^a-zA-Z])l\[" "Left/Right square brackets" rA
 `!p snip.rv = match.group(1)`\left[ ${1:${VISUAL:}} \right]$0
 endsnippet
 
-snippet "([\W_])l\{" "Left/Right curly braces" rA
+snippet "([^a-zA-Z])l\{" "Left/Right curly braces" rA
 `!p snip.rv = match.group(1)`\left\\{ ${1:${VISUAL:}} \right\\}$0
 endsnippet
 
-snippet "([\W_])b\(" "Big/Big parentheses" rA
+snippet "([^a-zA-Z])b\(" "big/big parentheses" rA
 `!p snip.rv = match.group(1)`\big( ${1:${VISUAL:}} \big)$0
 endsnippet
 
-snippet "([\W_])b\[" "Big/Big square brackets" rA
+snippet "([^a-zA-Z])b\[" "big/big square brackets" rA
 `!p snip.rv = match.group(1)`\big[ ${1:${VISUAL:}} \big]$0
 endsnippet
 
-snippet "([\W_])b\{" "Big/Big curly braces" rA
+snippet "([^a-zA-Z])b\{" "big/big curly braces" rA
 `!p snip.rv = match.group(1)`\big\\{ ${1:${VISUAL:}} \big\\}$0
 endsnippet
+

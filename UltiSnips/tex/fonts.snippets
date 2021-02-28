@@ -4,11 +4,7 @@ snippet "(^|[^a-zA-Z])tt" "\texttt{} (typewriter)" rA
 `!p snip.rv = match.group(1)`\texttt{${1:${VISUAL:}}}$0
 endsnippet
 
-snippet "(^|[^a-zA-Z])lol" "Test" rA
-`!p snip.rv = match.group(1)`success
-endsnippet
-
-snippet "(^|[^a-zA-Z])ti" "\textit{} " r
+snippet "(^|[^a-zA-Z])tii" "\textit{} " rA
 `!p snip.rv = match.group(1)`\textit{${1:${VISUAL:}}}$0
 endsnippet
 
@@ -30,6 +26,10 @@ endsnippet
 
 snippet "(^|[^a-zA-Z])mcc" "\mathcal" rA
 `!p snip.rv = match.group(1)`\mathcal{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "(^|[^a-zA-Z])msf" "\mathsf" rA
+`!p snip.rv = match.group(1)`\mathsf{${1:${VISUAL:}}}$0
 endsnippet
 
 snippet "(^|[^a-zA-Z])mbb" "\mathbb" rA

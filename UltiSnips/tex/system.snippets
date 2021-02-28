@@ -1,12 +1,41 @@
 # Various ``sytem-style'' commands.
-# TODO: hyperref references for labeled sections
+# TODO:
 # Package import
 # \cite command
-# \ref command
 
+snippet s "New section" b
+\section{$1}
+$0
+endsnippet
+
+snippet ss "New subsection" b
+\subsection{$1}
+$0
+endsnippet
+
+snippet sss "New subsubsection" bA
+\subsubsection{$1}
+$0
+endsnippet
+
+snippet nc "\newcommand{}{}" b
+\newcommand{$1}{$2}$0
+endsnippet
+
+snippet rc "\renewcommand{}{}" b
+\renewcommand{$1}{$2}$0
+endsnippet
 
 snippet "([\W_])lbl" "\label{} (for creating cross-references and hyperlinks)" r
 `!p snip.rv = match.group(1)`\label{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])ref" "\ref{} (for creating cross-references and hyperlinks)" r
+`!p snip.rv = match.group(1)`\ref{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_])url" "\myhref{url}{displayname} (for referencing websites)" r
+`!p snip.rv = match.group(1)`\myhref{${1:${VISUAL:url}}}{${2:display name}}$0
 endsnippet
 
 snippet "([\W_])hr" "\href[label]{name} (for referencing sections)" r
@@ -20,10 +49,6 @@ endsnippet
 # For colored text
 snippet "([\W_])clr" "\textcolor{}{} (for colored text using the xcolor package)" r
 `!p snip.rv = match.group(1)`\textcolor{$1}{${2:${VISUAL:}}}$0
-endsnippet
-
-snippet "([\W_])clrr" "\textcolor{}{} (for red colored text using the xcolor package)" r
-`!p snip.rv = match.group(1)`\textcolor{red}{${1:${VISUAL:}}}$0
 endsnippet
 
 # These siunitx commands really should be somewhere else but I don't have a good place for them
